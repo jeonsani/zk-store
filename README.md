@@ -34,7 +34,7 @@ This code is licensed under the GNU General Public License (GPL).
 ## Contact
 For any inquiries or feedback, feel free to reach out:
 - Email: [atlanticpolars@gmail.com]
-- GitHub: [yourusername](https://github.com/Jeonsani)
+- GitHub: [Jeonsani](https://github.com/Jeonsani)
 
 ## Contributing
 Contributions are welcome! If you have suggestions for improvements or new features, please fork the repository and submit a pull request.
