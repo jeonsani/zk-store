@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZK Store - Digital Products</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="loading.css">
+    <style>
+        /* Copy all base styles from about.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #13111a;
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 2rem;
+            background: rgba(19, 17, 26, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 100px;
+            padding: 0.5rem 1rem;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .nav-logo a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ff66ff;
+        }
+
+        .join-discord {
+            background: #ff66ff;
+            padding: 0.5rem 1.5rem;
+            border-radius: 100px;
+            font-weight: 500;
+        }
+
+        .join-discord:hover {
+            background: #ff33ff !important;
+            color: white !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 20px 60px;
+            background: linear-gradient(180deg, rgba(255, 102, 255, 0.1) 0%, rgba(19, 17, 26, 0) 100%);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ff66ff, #ff99ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .primary-button {
+            background: #ff66ff;
+            color: white;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 100px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .primary-button:hover {
+            background: #ff33ff;
+            transform: scale(1.05);
+        }
+
+        .secondary-button {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 100px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .secondary-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 102, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 102, 255, 0.1);
+        }
+
+        .feature-card svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 20px;
+            fill: #ff66ff;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover svg {
+            transform: scale(1.1);
+        }
+
+        .feature-card h3 {
+            color: #ff66ff;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links a:not(.join-discord) {
+                display: none;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-wrapper">
+        <div class="loader">
+            <div class="loader-inner"></div>
+            <div class="loader-inner"></div>
+            <div class="loader-inner"></div>
+            <svg class="loader-logo" viewBox="0 0 24 24">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            </svg>
+        </div>
+    </div>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="#ff66ff">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                </svg>
+                <a href="index.html">ZK Store</a>
+            </div>
+            <div class="nav-links">
+                <a href="about.html">About</a>
+                <a href="products.html">Products</a>
+                <a href="reviews.html">Reviews</a>
+                <a href="faq.html">FAQ</a>
+                <a href="https://discord.gg/QwAEzZaqs9" class="join-discord">Join our Discord</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Get Premium Digital Products</h1>
+                <p>Access high-quality digital products and accounts at competitive prices. Instant delivery and 24/7 support guaranteed.</p>
+                <div class="hero-buttons">
+                    <a href="discord" class="primary-button">Join our Discord</a>
+                    <a href="products.html" class="secondary-button">Browse Products</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                </svg>
+                <h3>Instant Delivery</h3>
+                <p>Get your products delivered automatically within seconds of purchase. Our system works 24/7.</p>
+            </div>
+
+            <div class="feature-card">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                </svg>
+                <h3>Best Prices</h3>
+                <p>We offer competitive prices and regular discounts to ensure you get the best value for your money.</p>
+            </div>
+
+            <div class="feature-card">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm1-11h-2v3H8v2h3v3h2v-3h3v-2h-3z"/>
+                </svg>
+                <h3>24/7 Support</h3>
+                <p>Our dedicated support team is always available to help you with any questions or concerns.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        window.addEventListener('load', () => {
+            const loader = document.querySelector('.loader-wrapper');
+            setTimeout(() => {
+                loader.classList.add('loader-hidden');
+            }, 1000); // Shows loader for at least 1 second
+            
+            loader.addEventListener('transitionend', () => {
+                document.body.removeChild(loader);
+            });
+        });
+    </script>
+</body>
+</html>

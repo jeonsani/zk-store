@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="loading.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streaming Accounts - ZK Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles from about.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #13111a;
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 2rem;
+            background: rgba(19, 17, 26, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 100px;
+            padding: 0.5rem 1rem;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .nav-logo a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ff66ff;
+        }
+
+        .join-discord {
+            background: #ff66ff;
+            padding: 0.5rem 1.5rem;
+            border-radius: 100px;
+            font-weight: 500;
+        }
+
+        .join-discord:hover {
+            background: #ff33ff !important;
+            color: white !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 20px 40px;
+            background: linear-gradient(180deg, rgba(255, 102, 255, 0.1) 0%, rgba(19, 17, 26, 0) 100%);
+        }
+
+        .hero-content {
+            text-align: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ff66ff, #ff99ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Updated Product Details Styles */
+        .product-details {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .product-category {
+            margin-bottom: 60px;
+        }
+
+        .product-category h2 {
+            color: #ff66ff;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 102, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 102, 255, 0.1);
+        }
+
+        .product-item h3 {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            color: #ff66ff;
+            margin: 15px 0;
+            font-weight: 700;
+        }
+
+        .product-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .product-features li {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .stock-status {
+            color: #4CAF50;
+            margin: 15px 0;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .out-of-stock {
+            color: #f44336;
+        }
+
+        .buy-button {
+            background: #ff66ff;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 100px;
+            display: inline-block;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .buy-button:hover {
+            background: #ff33ff;
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 768px) {
+            .product-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="#ff66ff">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                </svg>
+                <a href="index.html">ZK Store</a>
+            </div>
+            <div class="nav-links">
+                <a href="about.html">About</a>
+                <a href="products.html">Products</a>
+                <a href="reviews.html">Reviews</a>
+                <a href="faq.html">FAQ</a>
+                <a href="https://discord.gg/QwAEzZaqs9" class="join-discord">Join our Discord</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Streaming Accounts</h1>
+                <p>Premium streaming service accounts with full warranty and 24/7 support.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="product-details">
+        <div class="product-category">
+            <h2>Netflix Accounts</h2>
+            <div class="product-list">
+                <div class="product-item">
+                    <h3>Standard Plan</h3>
+                    <div class="product-price">$9.99</div>
+                    <ul class="product-features">
+                        <li>HD Streaming</li>
+                        <li>2 Screens</li>
+                        <li>30-Day Warranty</li>
+                    </ul>
+                    <div class="stock-status">In Stock</div>
+                    <a href="#" class="buy-button">Purchase Now</a>
+                </div>
+
+                <div class="product-item">
+                    <h3>Premium Plan</h3>
+                    <div class="product-price">$14.99</div>
+                    <ul class="product-features">
+                        <li>4K UHD Streaming</li>
+                        <li>4 Screens</li>
+                        <li>90-Day Warranty</li>
+                    </ul>
+                    <div class="stock-status">In Stock</div>
+                    <a href="#" class="buy-button">Purchase Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-category">
+            <h2>Disney+ Accounts</h2>
+            <div class="product-list">
+                <div class="product-item">
+                    <h3>Basic Package</h3>
+                    <div class="product-price">$8.99</div>
+                    <ul class="product-features">
+                        <li>Ad-Free Streaming</li>
+                        <li>All Content Access</li>
+                        <li>30-Day Warranty</li>
+                    </ul>
+                    <div class="stock-status">In Stock</div>
+                    <a href="#" class="buy-button">Purchase Now</a>
+                </div>
+
+                <div class="product-item">
+                    <h3>Bundle Package</h3>
+                    <div class="product-price">$19.99</div>
+                    <ul class="product-features">
+                        <li>Disney+, Hulu, ESPN+</li>
+                        <li>Premium Content</li>
+                        <li>60-Day Warranty</li>
+                    </ul>
+                    <div class="stock-status">In Stock</div>
+                    <a href="#" class="buy-button">Purchase Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="loader-wrapper">
+        <div class="loader">
+            <div class="loader-inner"></div>
+            <div class="loader-inner"></div>
+            <div class="loader-inner"></div>
+            <svg class="loader-logo" viewBox="0 0 24 24">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            </svg>
+        </div>
+    </div>
+    <script src="loading.js"></script>
+</body>
+</html> 
